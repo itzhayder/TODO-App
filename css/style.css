@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url("../images/BG.svg");
+    background-size: cover;
+}
+
+.container {
+    width: 510px;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.list-container {
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+    height: 400px;
+    overflow-y: auto;
+    width: 500px;
+}
+
+.list-container::-webkit-scrollbar {
+    width: 2px;
+}
+
+.list-container::-webkit-scrollbar-track {
+    background: white;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    background: rgb(255, 188, 188);
+}
+
+.list-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 8px;
+    width: 500px;
+    height: fit-content;
+    padding: 15px 0 15px 0;
+    background-color: white;
+    border-radius: 14px;
+    font-size: 16 px;
+    font-weight: 500;
+    position: relative;
+}
+
+.circle,
+.remove,
+p {
+    display: inline-block;
+}
+
+img {
+    width: 18px;
+}
+
+.circle,
+.remove {
+    position: absolute;
+    cursor: pointer;
+}
+
+.circle {
+    top: 17px;
+    left: 25px;
+}
+
+.remove {
+    top: 17px;
+    right: 25px;
+}
+
+p {
+    margin: 0 65px 0 65px;
+    text-align: justify;
+}
+
+.line-through {
+    text-decoration: line-through;
+    color: red;
+}
+
+
+
+.input-container {
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 500px;
+    background-color: white;
+    position: relative;
+    border-radius: 14px;
+}
+
+#user-input {
+    border: none;
+    padding: 15px 0 15px 0;
+    font-size: 20px;
+    font-weight: lighter;
+    margin-left: 25px;
+    width: 410px;
+}
+
+#user-input::placeholder {
+    color: #B9B9B9;
+}
+
+#user-input:focus::placeholder {
+    color: transparent;
+}
+
+#plus {
+    display: block;
+    position: absolute;
+    top: 17px;
+    right: 25px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #B9B9B9;
+}
