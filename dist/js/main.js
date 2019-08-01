@@ -1,7 +1,7 @@
 // ----------  TASK Controller  ----------
 
-let taskController = (function() {
-  let Task = function(id, text) {
+let taskController = (function () {
+  let Task = function (id, text) {
     this.id = id;
     this.text = text;
     this.done = false;
@@ -14,7 +14,7 @@ let taskController = (function() {
   }
 
   return {
-    addTask: function(text) {
+    addTask: function (text) {
       let _id;
       if (taskList.length > 0) {
         _id = taskList[taskList.length - 1].id + 1;
@@ -30,7 +30,7 @@ let taskController = (function() {
       return task;
     },
 
-    completeTask: function(id) {
+    completeTask: function (id) {
       let taskID = id.split("-");
       taskID = taskID[1];
 
@@ -42,7 +42,7 @@ let taskController = (function() {
       localStorage.setItem("todoList", JSON.stringify(taskList));
     },
 
-    removeTask: function(id) {
+    removeTask: function (id) {
       let taskID = id.split("-");
       taskID = taskID[1];
       for (let i of taskList) {
@@ -54,15 +54,15 @@ let taskController = (function() {
       }
     },
 
-    getTaskList: function() {
+    getTaskList: function () {
       return taskList;
     },
 
-    setTaskList: function(list) {
+    setTaskList: function (list) {
       setList(list);
     },
 
-    testing: function() {
+    testing: function () {
       return taskList;
     }
   };
@@ -70,7 +70,7 @@ let taskController = (function() {
 
 // ----------  UI Controller  ----------
 
-let uiController = (function() {
+let uiController = (function () {
   let domStrings = {
     circle: ".circle",
     remove: ".remove",
@@ -82,16 +82,16 @@ let uiController = (function() {
   };
 
   return {
-    getInput: function() {
+    getInput: function () {
       return document.querySelector(domStrings.userInput).value;
     },
 
-    getListElement: function() {
+    getListElement: function () {
       let list = document.querySelector(domStrings.list);
       return list;
     },
 
-    addTask: function(task) {
+    addTask: function (task) {
       let html;
       if (!task.done) {
         html = `<li id="task-${task.id}">
@@ -119,7 +119,7 @@ let uiController = (function() {
       list.insertAdjacentHTML("beforeend", html);
     },
 
-    completeTask: function(id) {
+    completeTask: function (id) {
       try {
         let el = document.getElementById(id);
         // for remove
@@ -143,14 +143,14 @@ let uiController = (function() {
       } catch (err) {}
     },
 
-    removeTask: function(id) {
+    removeTask: function (id) {
       try {
         let el = document.getElementById(id);
         el.parentNode.removeChild(el);
       } catch (err) {}
     },
 
-    getDOM: function() {
+    getDOM: function () {
       return domStrings;
     }
   };
@@ -158,24 +158,28 @@ let uiController = (function() {
 
 // ----------  APP Controller  ----------
 
-let appController = (function(tCtrl, uiCtrl) {
+let appController = (function (tCtrl, uiCtrl) {
   function startApp() {
     let dom = uiCtrl.getDOM();
     let taskList = tCtrl.getTaskList();
     console.log("App started successfully...");
 
     // Local storage check
-    let items = localStorage.getItem("todoList");
-    let data = JSON.parse(items);
-    if (data.length) {
-      data.forEach(el => {
-        uiCtrl.addTask(el);
-      });
-      tCtrl.setTaskList(data);
+    let checkLocalStorage = async function () {
+      let items = await localStorage.getItem("todoList");
+      let data = await JSON.parse(items);
+      if (data.length) {
+        data.forEach(el => {
+          uiCtrl.addTask(el);
+        });
+        tCtrl.setTaskList(data);
+      }
     }
+    checkLocalStorage();
+
 
     // Add Item
-    let addItem = function() {
+    let addItem = function () {
       // Get Input
       let input = uiCtrl.getInput();
 
@@ -192,7 +196,7 @@ let appController = (function(tCtrl, uiCtrl) {
     };
 
     // Complete Item
-    let modifyItem = function(event) {
+    let modifyItem = function (event) {
       if (event.target.parentNode.classList.contains("circle")) {
         // Take the id
         let targetID = event.target.parentNode.parentNode.id;
@@ -219,7 +223,7 @@ let appController = (function(tCtrl, uiCtrl) {
   }
 
   return {
-    startApp: function() {
+    startApp: function () {
       startApp();
     }
   };
