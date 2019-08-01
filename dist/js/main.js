@@ -183,11 +183,14 @@ let appController = (function (tCtrl, uiCtrl) {
       let input = uiCtrl.getInput();
 
       if (input) {
-        // Add in task controller
-        newTask = tCtrl.addTask(input);
 
-        // Add to ui controller
-        uiCtrl.addTask(newTask);
+        let theTask = async function () {
+          // Add in task controller
+          newTask = await tCtrl.addTask(input);
+          // Add to ui controller
+          uiCtrl.addTask(newTask);
+        }
+        theTask();
 
         // Clear the text field
         document.querySelector(dom.userInput).value = "";
