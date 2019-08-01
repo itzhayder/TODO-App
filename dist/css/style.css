@@ -92,6 +92,7 @@ img {
 .remove {
     position: absolute;
     cursor: pointer;
+    transition: linear 0.2s;
 }
 
 .circle {
@@ -99,12 +100,18 @@ img {
     left: 25px;
 }
 
+.circle:hover {
+    transform: scale(1.2);
+}
+
 .remove {
     top: 17px;
     right: 25px;
 }
 
-.remove:hover {}
+.remove:hover {
+    transform: rotate(10deg) scale(1.2);
+}
 
 p {
     margin: 0 65px 0 65px;

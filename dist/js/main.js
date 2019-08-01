@@ -162,7 +162,6 @@ let appController = (function (tCtrl, uiCtrl) {
   function startApp() {
     let dom = uiCtrl.getDOM();
     let taskList = tCtrl.getTaskList();
-    console.log("App started successfully...");
 
     // Local storage check
     let checkLocalStorage = async function () {
