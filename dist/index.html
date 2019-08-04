@@ -1,38 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
 
-  <!-- CSS File -->
-  <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
 
-  <title>TODO App</title>
-</head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-<body>
-  <div class="container">
-    <div class="list-container">
-      <ul id="list">
-      </ul>
+    <!-- CSS File -->
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <title>TODO App</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="list-container">
+        <ul id="list">
+          <!-- <li id="task-0">
+            <div class="circle">
+              <i class="far fa-circle"></i>
+            </div>
+            <p>Drink water</p>
+            <div class="remove">
+              <i class="fas fa-trash"></i>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+
+      <div class="input-container">
+        <div class="input-group">
+          <div id="input">
+            <input
+              type="text"
+              name="input"
+              id="msg"
+              placeholder="Add your task"
+            />
+          </div>
+          <div id="plus">
+            <i class="fas fa-plus fa-lg"></i>
+          </div>
+        </div>
+
+        <!-- <img src="./images/Plus.png" alt="Plus" id="plus" /> -->
+      </div>
+
+      <footer>
+        Developed by NextGenCode
+      </footer>
     </div>
 
-    <div class="input-container">
-      <input type="text" name="input" placeholder="Add your task" id="user-input" maxlength="42" />
-      <img src="./images/Plus.png" alt="Plus" id="plus" />
-    </div>
+    <script src="./js/main.js"></script>
 
-    <footer>
-      <p>Developed by NextGenCode</p>
-    </footer>
-  </div>
-
-  <script src="./js/main.js"></script>
-</body>
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
 </html>

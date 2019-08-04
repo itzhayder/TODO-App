@@ -11,10 +11,23 @@
       rel="stylesheet"
     />
 
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <!-- CSS File -->
     <link rel="stylesheet" href="./css/style.css" />
 
-    <title>Document</title>
+    <title>TODO App</title>
   </head>
 
   <body>
@@ -23,32 +36,44 @@
         <ul id="list">
           <!-- <li id="task-0">
             <div class="circle">
-              <img src="./images/Circle.png" alt="Circle" />
+              <i class="far fa-circle"></i>
             </div>
-            <p>Drink water at 10 pm</p>
+            <p>Drink water</p>
             <div class="remove">
-              <img src="./images/Remove.png" alt="Remove" />
+              <i class="fas fa-trash"></i>
             </div>
           </li> -->
         </ul>
       </div>
 
       <div class="input-container">
-        <input
-          type="text"
-          name="input"
-          placeholder="Add your task"
-          id="user-input"
-          maxlength="42"
-        />
-        <img src="./images/Plus.png" alt="Plus" id="plus" />
+        <div class="input-group">
+          <div id="input">
+            <input
+              type="text"
+              name="input"
+              id="msg"
+              placeholder="Add your task"
+            />
+          </div>
+          <div id="plus">
+            <i class="fas fa-plus fa-lg"></i>
+          </div>
+        </div>
+
+        <!-- <img src="./images/Plus.png" alt="Plus" id="plus" /> -->
       </div>
 
       <footer>
-        <p>Developed by NextGenCode</p>
+        Developed by NextGenCode
       </footer>
     </div>
 
     <script src="./js/main.js"></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>

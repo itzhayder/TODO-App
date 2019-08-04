@@ -32,7 +32,7 @@ let taskController = (function() {
 
     completeTask: function(id) {
       let taskID = id.split("-");
-      taskID = taskID[1];
+      taskID = taskID[0];
 
       for (let i of taskList) {
         if (i.id == taskID) {
@@ -44,7 +44,7 @@ let taskController = (function() {
 
     removeTask: function(id) {
       let taskID = id.split("-");
-      taskID = taskID[1];
+      taskID = taskID[0];
       for (let i of taskList) {
         if (i.id == taskID) {
           let index = taskList.indexOf(i);
@@ -75,7 +75,7 @@ let uiController = (function() {
     circle: ".circle",
     remove: ".remove",
     plus: "#plus",
-    userInput: "#user-input",
+    userInput: "#msg",
     list: "#list",
     container: ".list-container",
     lineThrough: "line-through"
@@ -94,25 +94,29 @@ let uiController = (function() {
     addTask: function(task) {
       let html;
       if (!task.done) {
-        html = `<li id="task-${task.id}">
-                            <div class="circle">
-                                <img src="./images/Circle.png" alt="Circle">
-                            </div>
-                            <p>${task.text}</p>
-                            <div class="remove">
-                                <img src="./images/Remove.png" alt="Remove">
-                            </div>
-                        </li>`;
+        html = `<li id="${
+          task.id
+        }" data-aos="slide-up" data-aos-offset="-10000">
+                  <div class="circle">
+                    <i class="far fa-circle"></i>
+                  </div>
+                  <p>${task.text}</p>
+                  <div class="remove">
+                    <i class="fas fa-trash"></i>
+                  </div>
+                </li>`;
       } else {
-        html = `<li id="task-${task.id}">
-                            <div class="circle">
-                                <img src="./images/Circle_Green.png" alt="Circle">
-                            </div>
-                            <p class="line-through">${task.text}</p>
-                            <div class="remove">
-                                <img src="./images/Remove.png" alt="Remove">
-                            </div>
-                        </li>`;
+        html = `<li id="${
+          task.id
+        }" data-aos="slide-up" data-aos-offset="-10000">
+                  <div class="circle">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <p class="line-through">${task.text}</p>
+                  <div class="remove">
+                    <i class="fas fa-trash"></i>
+                  </div>
+                </li>`;
       }
 
       let list = this.getListElement();
@@ -127,20 +131,21 @@ let uiController = (function() {
 
         let childEl = el.children;
         // childEl[1].classList.toggle(domStrings.circle);
-        let imgSelect = childEl[0].children[0];
-        let imgSrc = imgSelect.src;
-        let imgName = imgSrc.split("/");
-        imgName = imgName[imgName.length - 1];
+        let icon = childEl[0].children[0];
 
-        if (imgName == "Circle.png") {
-          imgSelect.src = "../images/Circle_Green.png";
+        if (icon.className === "far fa-circle") {
+          icon.classList.remove("far", "fa-circle");
+          icon.classList.add("fas", "fa-check-circle");
         } else {
-          imgSelect.src = "../images/Circle.png";
+          icon.classList.add("far", "fa-circle");
+          icon.classList.remove("fas", "fa-check-circle");
         }
 
         // Toggle line through
         childEl[1].classList.toggle(domStrings.lineThrough);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     },
 
     removeTask: function(id) {
@@ -162,17 +167,21 @@ let appController = (function(tCtrl, uiCtrl) {
   function startApp() {
     let dom = uiCtrl.getDOM();
     let taskList = tCtrl.getTaskList();
-    console.log("App started successfully...");
 
     // Local storage check
-    let items = localStorage.getItem("todoList");
-    let data = JSON.parse(items);
-    if (data.length) {
-      data.forEach(el => {
-        uiCtrl.addTask(el);
-      });
-      tCtrl.setTaskList(data);
-    }
+    let checkLocalStorage = async function() {
+      if ("todoList" in localStorage) {
+        let items = await localStorage.getItem("todoList");
+        let data = await JSON.parse(items);
+        if (data.length) {
+          data.forEach(el => {
+            uiCtrl.addTask(el);
+          });
+          tCtrl.setTaskList(data);
+        }
+      }
+    };
+    checkLocalStorage();
 
     // Add Item
     let addItem = function() {
@@ -180,11 +189,13 @@ let appController = (function(tCtrl, uiCtrl) {
       let input = uiCtrl.getInput();
 
       if (input) {
-        // Add in task controller
-        newTask = tCtrl.addTask(input);
-
-        // Add to ui controller
-        uiCtrl.addTask(newTask);
+        let theTask = async function() {
+          // Add in task controller
+          newTask = await tCtrl.addTask(input);
+          // Add to ui controller
+          uiCtrl.addTask(newTask);
+        };
+        theTask();
 
         // Clear the text field
         document.querySelector(dom.userInput).value = "";
